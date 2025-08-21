@@ -12,19 +12,41 @@ import {
 } from '../../utils/dateUtils';
 
 describe('getDaysInMonth', () => {
-  it('1월은 31일 수를 반환한다', () => {});
+  const isLeapYear = (year: number) => {
+    return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+  };
 
-  it('4월은 30일 일수를 반환한다', () => {});
+  it('1월은 31일 수를 반환한다', () => {
+    expect(getDaysInMonth(2025, 1)).toBe(31);
+  });
 
-  it('윤년의 2월에 대해 29일을 반환한다', () => {});
+  it('4월은 30일 일수를 반환한다', () => {
+    expect(getDaysInMonth(2025, 4)).toBe(30);
+  });
 
-  it('평년의 2월에 대해 28일을 반환한다', () => {});
+  it('윤년의 2월에 대해 29일을 반환한다', () => {
+    // TODO: 의문... isLeapYear가 잘못 구현된거면...? 그럼 isLeapYear도 테스트 해야하나...
+    if (isLeapYear(2024)) {
+      expect(getDaysInMonth(2024, 2)).toBe(29);
+    }
+  });
 
-  it('유효하지 않은 월에 대해 적절히 처리한다', () => {});
+  it('평년의 2월에 대해 28일을 반환한다', () => {
+    if (!isLeapYear(2025)) {
+      expect(getDaysInMonth(2025, 2)).toBe(28);
+    }
+  });
+
+  it('유효하지 않은 월에 대해 적절히 처리한다', () => {
+    // 13월은 다음해 1월로 처리됨 (12월 일수와 동일)
+    expect(getDaysInMonth(2025, 13)).toBe(31); // 2026년 1월 = 31일
+  });
 });
 
 describe('getWeekDates', () => {
-  it('주중의 날짜(수요일)에 대해 올바른 주의 날짜들을 반환한다', () => {});
+  it('주중의 날짜(수요일)에 대해 올바른 주의 날짜들을 반환한다', () => {
+    
+  });
 
   it('주의 시작(월요일)에 대해 올바른 주의 날짜들을 반환한다', () => {});
 
