@@ -44,9 +44,7 @@ describe('getDaysInMonth', () => {
 });
 
 describe('getWeekDates', () => {
-  it('주중의 날짜(수요일)에 대해 올바른 주의 날짜들을 반환한다', () => {
-
-  });
+  it('주중의 날짜(수요일)에 대해 올바른 주의 날짜들을 반환한다', () => {});
 
   it('주의 시작(월요일)에 대해 올바른 주의 날짜들을 반환한다', () => {});
 
@@ -108,23 +106,59 @@ describe('isDateInRange', () => {
 });
 
 describe('fillZero', () => {
-  it("5를 2자리로 변환하면 '05'를 반환한다", () => {});
+  it("5를 2자리로 변환하면 '05'를 반환한다", () => {
+    const number = 5;
+    const formatted = fillZero(number, 2);
+    expect(formatted).toBe('05');
+  });
 
-  it("10을 2자리로 변환하면 '10'을 반환한다", () => {});
+  it("10을 2자리로 변환하면 '10'을 반환한다", () => {
+    const number = 10;
+    const formatted = fillZero(number, 2);
+    expect(formatted).toBe('10');
+  });
 
-  it("3을 3자리로 변환하면 '003'을 반환한다", () => {});
+  it("3을 3자리로 변환하면 '003'을 반환한다", () => {
+    const number = 3;
+    const formatted = fillZero(number, 3);
+    expect(formatted).toBe('003');
+  });
 
-  it("100을 2자리로 변환하면 '100'을 반환한다", () => {});
+  it("100을 2자리로 변환하면 '100'을 반환한다", () => {
+    const number = 100;
+    const formatted = fillZero(number, 2);
+    expect(formatted).toBe('100');
+  });
 
-  it("0을 2자리로 변환하면 '00'을 반환한다", () => {});
+  it("0을 2자리로 변환하면 '00'을 반환한다", () => {
+    const number = 0;
+    const formatted = fillZero(number, 2);
+    expect(formatted).toBe('00');
+  });
 
-  it("1을 5자리로 변환하면 '00001'을 반환한다", () => {});
+  it("1을 5자리로 변환하면 '00001'을 반환한다", () => {
+    const number = 1;
+    const formatted = fillZero(number, 5);
+    expect(formatted).toBe('00001');
+  });
 
-  it("소수점이 있는 3.14를 5자리로 변환하면 '03.14'를 반환한다", () => {});
+  it("소수점이 있는 3.14를 5자리로 변환하면 '03.14'를 반환한다", () => {
+    const number = 3.14;
+    const formatted = fillZero(number, 5);
+    expect(formatted).toBe('03.14');
+  });
 
-  it('size 파라미터를 생략하면 기본값 2를 사용한다', () => {});
+  it('size 파라미터를 생략하면 기본값 2를 사용한다', () => {
+    const number = 5;
+    const formatted = fillZero(number); // size 파라미터 생략
+    expect(formatted).toBe('05');
+  });
 
-  it('value가 지정된 size보다 큰 자릿수를 가지면 원래 값을 그대로 반환한다', () => {});
+  it('value가 지정된 size보다 큰 자릿수를 가지면 원래 값을 그대로 반환한다', () => {
+    const number = 12345;
+    const formatted = fillZero(number, 3);
+    expect(formatted).toBe('12345');
+  });
 });
 
 describe('formatDate', () => {
@@ -139,7 +173,7 @@ describe('formatDate', () => {
   it('day 파라미터가 제공되면 해당 일자로 포맷팅한다', () => {
     const date = new Date('2025-07-12');
     const day = 25;
-    
+
     const expected = '2025-07-25';
     const formatted = formatDate(date, day);
 
