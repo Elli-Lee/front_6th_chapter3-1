@@ -45,7 +45,7 @@ describe('getDaysInMonth', () => {
 
 describe('getWeekDates', () => {
   it('주중의 날짜(수요일)에 대해 올바른 주의 날짜들을 반환한다', () => {
-    
+
   });
 
   it('주의 시작(월요일)에 대해 올바른 주의 날짜들을 반환한다', () => {});
@@ -128,11 +128,37 @@ describe('fillZero', () => {
 });
 
 describe('formatDate', () => {
-  it('날짜를 YYYY-MM-DD 형식으로 포맷팅한다', () => {});
+  it('날짜를 YYYY-MM-DD 형식으로 포맷팅한다', () => {
+    const date = new Date('2025-08-22');
+    const expected = '2025-08-22';
+    const formatted = formatDate(date);
 
-  it('day 파라미터가 제공되면 해당 일자로 포맷팅한다', () => {});
+    expect(formatted).toBe(expected);
+  });
 
-  it('월이 한 자리 수일 때 앞에 0을 붙여 포맷팅한다', () => {});
+  it('day 파라미터가 제공되면 해당 일자로 포맷팅한다', () => {
+    const date = new Date('2025-07-12');
+    const day = 25;
+    
+    const expected = '2025-07-25';
+    const formatted = formatDate(date, day);
 
-  it('일이 한 자리 수일 때 앞에 0을 붙여 포맷팅한다', () => {});
+    expect(formatted).toBe(expected);
+  });
+
+  it('월이 한 자리 수일 때 앞에 0을 붙여 포맷팅한다', () => {
+    const date = new Date('2025-05-19');
+    const expected = '2025-05-19';
+    const formatted = formatDate(date);
+
+    expect(formatted).toBe(expected);
+  });
+
+  it('일이 한 자리 수일 때 앞에 0을 붙여 포맷팅한다', () => {
+    const date = new Date('2025-11-02');
+    const expected = '2025-11-02';
+    const formatted = formatDate(date);
+
+    expect(formatted).toBe(expected);
+  });
 });
