@@ -157,35 +157,229 @@ describe('getWeekDates', () => {
 
     expect(result).toEqual(expected);
   });
-
 });
 
 describe('getWeeksAtMonth', () => {
-  it('2025년 7월 1일의 올바른 주 정보를 반환해야 한다', () => {});
+  it('2025년 7월 1일의 올바른 주 정보를 반환해야 한다', () => {
+    const date = new Date('2025-07-01');
+    const expected = [
+      [null, null, 1, 2, 3, 4, 5],
+      [6, 7, 8, 9, 10, 11, 12],
+      [13, 14, 15, 16, 17, 18, 19],
+      [20, 21, 22, 23, 24, 25, 26],
+      [27, 28, 29, 30, 31, null, null],
+    ];
+    const result = getWeeksAtMonth(date);
+
+    expect(result).toEqual(expected);
+  });
 });
 
 describe('getEventsForDay', () => {
-  it('특정 날짜(1일)에 해당하는 이벤트만 정확히 반환한다', () => {});
+  const events: Event[] = [
+    {
+      date: '2025-07-01',
+      title: 'Event 1',
+      id: '1',
+      startTime: '10:00',
+      endTime: '11:00',
+      description: 'Description 1',
+      location: 'Location 1',
+      category: 'Category 1',
+      repeat: { type: 'none', interval: 1 },
+      notificationTime: 10,
+    },
+    {
+      date: '2025-07-02',
+      title: 'Event 2',
+      id: '2',
+      startTime: '12:00',
+      endTime: '13:00',
+      description: 'Description 2',
+      location: 'Location 2',
+      category: 'Category 2',
+      repeat: { type: 'none', interval: 1 },
+      notificationTime: 10,
+    },
+    {
+      date: '2025-07-03',
+      title: 'Event 3',
+      id: '3',
+      startTime: '14:00',
+      endTime: '15:00',
+      description: 'Description 3',
+      location: 'Location 3',
+      category: 'Category 3',
+      repeat: { type: 'none', interval: 1 },
+      notificationTime: 10,
+    },
+    {
+      date: '2025-07-04',
+      title: 'Event 4',
+      id: '4',
+      startTime: '16:00',
+      endTime: '17:00',
+      description: 'Description 4',
+      location: 'Location 4',
+      category: 'Category 4',
+      repeat: { type: 'none', interval: 1 },
+      notificationTime: 10,
+    },
+    {
+      date: '2025-07-05',
+      title: 'Event 5',
+      id: '5',
+      startTime: '18:00',
+      endTime: '19:00',
+      description: 'Description 5',
+      location: 'Location 5',
+      category: 'Category 5',
+      repeat: { type: 'none', interval: 1 },
+      notificationTime: 10,
+    },
+    {
+      date: '2025-07-06',
+      title: 'Event 6',
+      id: '6',
+      startTime: '20:00',
+      endTime: '21:00',
+      description: 'Description 6',
+      location: 'Location 6',
+      category: 'Category 6',
+      repeat: { type: 'none', interval: 1 },
+      notificationTime: 10,
+    },
+    {
+      date: '2025-07-07',
+      title: 'Event 7',
+      id: '7',
+      startTime: '22:00',
+      endTime: '23:00',
+      description: 'Description 7',
+      location: 'Location 7',
+      category: 'Category 7',
+      repeat: { type: 'none', interval: 1 },
+      notificationTime: 10,
+    },
+    {
+      date: '2025-07-08',
+      title: 'Event 8',
+      id: '8',
+      startTime: '00:00',
+      endTime: '01:00',
+      description: 'Description 8',
+      location: 'Location 8',
+      category: 'Category 8',
+      repeat: { type: 'none', interval: 1 },
+      notificationTime: 10,
+    },
+    {
+      date: '2025-07-09',
+      title: 'Event 9',
+      id: '9',
+      startTime: '02:00',
+      endTime: '03:00',
+      description: 'Description 9',
+      location: 'Location 9',
+      category: 'Category 9',
+      repeat: { type: 'none', interval: 1 },
+      notificationTime: 10,
+    },
+    {
+      date: '2025-07-10',
+      title: 'Event 10',
+      id: '10',
+      startTime: '04:00',
+      endTime: '05:00',
+      description: 'Description 10',
+      location: 'Location 10',
+      category: 'Category 10',
+      repeat: { type: 'none', interval: 1 },
+      notificationTime: 10,
+    },
+  ];
 
-  it('해당 날짜에 이벤트가 없을 경우 빈 배열을 반환한다', () => {});
+  it('특정 날짜(1일)에 해당하는 이벤트만 정확히 반환한다', () => {
+    const day = 1;
+    const result = getEventsForDay(events, day);
+    const expected = [events[0]];
 
-  it('날짜가 0일 경우 빈 배열을 반환한다', () => {});
+    expect(result).toEqual(expected);
+  });
 
-  it('날짜가 32일 이상인 경우 빈 배열을 반환한다', () => {});
+  it('해당 날짜에 이벤트가 없을 경우 빈 배열을 반환한다', () => {
+    const day = 11;
+    const result = getEventsForDay(events, day);
+    const expected: Event[] = [];
+
+    expect(result).toEqual(expected);
+  });
+
+  it('날짜가 0일 경우 빈 배열을 반환한다', () => {
+    const day = 0;
+    const result = getEventsForDay(events, day);
+    const expected: Event[] = [];
+
+    expect(result).toEqual(expected);
+  });
+
+  it('날짜가 32일 이상인 경우 빈 배열을 반환한다', () => {
+    const day = 32;
+    const result = getEventsForDay(events, day);
+    const expected: Event[] = [];
+
+    expect(result).toEqual(expected);
+  });
 });
 
 describe('formatWeek', () => {
-  it('월의 중간 날짜에 대해 올바른 주 정보를 반환한다', () => {});
+  it('월의 중간 날짜에 대해 올바른 주 정보를 반환한다', () => {
+    const date = new Date('2025-07-15');
+    const expected = '2025년 7월 3주';
+    const formatted = formatWeek(date);
 
-  it('월의 첫 주에 대해 올바른 주 정보를 반환한다', () => {});
+    expect(formatted).toBe(expected);
+  });
 
-  it('월의 마지막 주에 대해 올바른 주 정보를 반환한다', () => {});
+  it('월의 첫 주에 대해 올바른 주 정보를 반환한다', () => {
+    const date = new Date('2025-07-01');
+    const expected = '2025년 7월 1주';
+    const formatted = formatWeek(date);
 
-  it('연도가 바뀌는 주에 대해 올바른 주 정보를 반환한다', () => {});
+    expect(formatted).toBe(expected);
+  });
 
-  it('윤년 2월의 마지막 주에 대해 올바른 주 정보를 반환한다', () => {});
+  it('월의 마지막 주에 대해 올바른 주 정보를 반환한다', () => {
+    const date = new Date('2025-07-31');
+    const expected = '2025년 7월 5주';
+    const formatted = formatWeek(date);
 
-  it('평년 2월의 마지막 주에 대해 올바른 주 정보를 반환한다', () => {});
+    expect(formatted).toBe(expected);
+  });
+
+  it('연도가 바뀌는 주에 대해 올바른 주 정보를 반환한다', () => {
+    const date = new Date('2025-12-31');
+    const expected = '2026년 1월 1주';
+    const formatted = formatWeek(date);
+
+    expect(formatted).toBe(expected);
+  });
+
+  it('윤년 2월의 마지막 주에 대해 올바른 주 정보를 반환한다', () => {
+    const date = new Date('2024-02-29'); // 윤년 2월 마지막 주
+    const expected = '2024년 2월 5주';
+    const formatted = formatWeek(date);
+
+    expect(formatted).toBe(expected);
+  });
+
+  it('평년 2월의 마지막 주에 대해 올바른 주 정보를 반환한다', () => {
+    const date = new Date('2025-02-28'); // 평년 2월 마지막 주
+    const expected = '2025년 2월 4주';
+    const formatted = formatWeek(date);
+
+    expect(formatted).toBe(expected);
+  });
 });
 
 describe('formatMonth', () => {
